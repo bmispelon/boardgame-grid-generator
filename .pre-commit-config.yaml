@@ -1,32 +1,33 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-yaml
-    -   id: check-added-large-files
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
 
--   repo: https://github.com/pre-commit/mirrors-prettier
+  - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.5.1
     hooks:
-    -   id: prettier
+      - id: prettier
         types_or:
-        -   css
-        -   html
-        -   javascript
+          - css
+          - html
+          - javascript
+          - yaml
         additional_dependencies:
-        -   prettier@2.5.1
+          - prettier@2.5.1
 
--   repo: https://github.com/pre-commit/mirrors-eslint
+  - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v8.6.0
     hooks:
-    -   id: eslint
+      - id: eslint
         args:
-        -   --fix
+          - --fix
         additional_dependencies:
-        -   eslint@8.6.0
-        -   eslint-config-google@0.14.0
-        -   eslint-config-prettier@8.3.0
+          - eslint@8.6.0
+          - eslint-config-google@0.14.0
+          - eslint-config-prettier@8.3.0
