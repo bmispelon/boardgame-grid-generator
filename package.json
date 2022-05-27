@@ -1,0 +1,31 @@
+{
+  "name": "boardgame-grid-generator",
+  "version": "0.1.0",
+  "description": "A static site to generate grids for boardgames",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmispelon/boardgame-grid-generator.git"
+  },
+  "author": "Baptiste Mispelon <bmispelon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmispelon/boardgame-grid-generator/issues"
+  },
+  "homepage": "https://github.com/bmispelon/boardgame-grid-generator#readme",
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "google",
+      "prettier"
+    ],
+    "env": {
+      "browser": true,
+      "es6": true
+    }
+  }
+}
