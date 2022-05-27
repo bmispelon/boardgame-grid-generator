@@ -1,0 +1,181 @@
+body {
+    --grid-color-white: #e6e7e8;
+    --grid-color-green: #78b159;
+    --grid-color-black: #31373d;
+
+    --palette-celadon-green: #21897eff;
+    --palette-oxford-blue: #001427ff;
+    --palette-french-sky-blue: #65afffff;
+    --palette-fuzzy-wuzzy: #d16666ff;
+    --palette-tea-green: #c5edacff;
+
+    --marker-color: var(--palette-french-sky-blue);
+    --marker-size: 1rem;
+
+    --stripe-width: 2rem;
+    --stripe-angle: -45deg;
+    --stripe-color-choose-player: var(--palette-oxford-blue);
+    --stripe-color-spoiler: var(--palette-fuzzy-wuzzy);
+
+    --nav-color-active: var(--palette-french-sky-blue);
+    --nav-color-hover: var(--palette-tea-green);
+
+    min-width: 20rem;
+    max-width: 40rem;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: .5rem .5rem 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: .5rem;
+    font-size: 2rem;
+}
+nav > span, nav > a{
+    padding: 1rem 0;
+}
+nav > span {
+    font-weight: bold;
+}
+nav > a {
+    border-radius: .25rem;
+    flex: 1;
+    text-align: center;
+}
+nav > a:hover {
+    background: var(--nav-color-hover);
+}
+nav > a, nav > a:visited {
+    color: inherit;
+}
+nav > a.active {
+    background: var(--nav-color-active);
+    position: relative;
+}
+nav > a.active:before {
+    content: "●";
+    font-size: 1rem;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+}
+nav > a.active:hover:before {
+    content: "×";
+}
+
+/*
+    Add side margins to all top-level elements except the grid container.
+    The value of the margin is set so that the elements are vertically aligned with the grids
+*/
+nav, menu[role="toolbar"], footer {
+    margin: 0 calc(5px + 1rem); /* grid border + grid padding */
+}
+
+
+.grid-container {
+    border: 5px solid transparent;
+    border-image: linear-gradient(
+        to bottom left,
+        var(--marker-color),
+        var(--marker-color) var(--marker-size),
+        transparent calc(2 * var(--marker-size))
+    ) 1;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+    transition: transform 1s ease-out;
+
+    position: relative;
+}
+.grid-container > .grid, .grid-container.spoiler > .grid:target {display: none}
+.grid-container > .grid:target {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+.grid-container.empty,
+.grid-container.spoiler {
+    border-image: none;
+    position: relative;
+    padding: calc(5px + 1rem);
+    border-width: 0;
+    background-clip: content-box;
+}
+
+.grid-container.empty:before,
+.grid-container.spoiler:before {
+    font-size: 3rem;
+    background: rgba(255, 255, 255, .8);
+    padding: 1rem;
+    border-radius: .5rem;
+    position: absolute;
+    bottom: 50%;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    text-align: center;
+    box-sizing: border-box;
+}
+.grid-container.spoiler {
+    background-image: repeating-linear-gradient(
+        var(--stripe-angle),
+        var(--stripe-color-spoiler),
+        var(--stripe-color-spoiler) var(--stripe-width),
+        white var(--stripe-width),
+        white calc(2 * var(--stripe-width))
+    );
+}
+.grid-container.spoiler:before{content: "Click to reveal"}
+@media (any-pointer: coarse) {.grid-container.spoiler:before{content: "Tap to reveal"}}
+
+.grid-container.empty {
+    background-image: repeating-linear-gradient(
+        var(--stripe-angle),
+        var(--stripe-color-choose-player),
+        var(--stripe-color-choose-player) var(--stripe-width),
+        white var(--stripe-width),
+        white calc(2 * var(--stripe-width))
+    );
+}
+.grid-container.empty:before {content: "Choose a player"}
+
+
+.grid > .card {
+    border-radius: .5rem;
+    aspect-ratio: 1 / 1;
+}
+.grid > .white {background: var(--grid-color-white)}
+.grid > .green {background: var(--grid-color-green)}
+.grid > .black {background: var(--grid-color-black)}
+
+menu[role="toolbar"] {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    font-size: 3rem;
+    gap: 1rem;
+}
+menu[role="toolbar"] > li.grow {flex: 1}
+menu[role="toolbar"] > li > button {
+    height: 100%;
+    width: 100%;
+    padding: 1rem .5rem;
+    font-size: inherit;
+}
+footer {
+    font-style: italic;
+    text-align: right;
+    background: var(--palette-celadon-green);
+}
+.spacer {
+    border: 0;
+    flex: 1;
+}
