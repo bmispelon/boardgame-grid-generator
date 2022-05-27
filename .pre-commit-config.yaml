@@ -15,6 +15,7 @@ repos:
     -   id: prettier
         types_or:
         -   css
+        -   html
         additional_dependencies:
         -   prettier@2.5.1
 
