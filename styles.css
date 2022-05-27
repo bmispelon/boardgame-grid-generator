@@ -161,6 +161,32 @@ footer {
   content: "Choose a player";
 }
 
+.grid-container.easteregg > .grid > .card {
+  position: relative;
+}
+.grid-container.easteregg > .grid > .card:before {
+  position: absolute;
+  top: calc(50% - 2.25rem);
+  left: calc(50% - 2rem);
+  font-size: 3rem;
+  padding: 0.5rem;
+  background: #ffffffaa;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+
+.grid-container.easteregg > .grid > .card.white:before {
+  content: "⛄"; /* snowman */
+}
+
+.grid-container.easteregg > .grid > .card.green:before {
+  content: "🐍"; /* snake */
+}
+
+.grid-container.easteregg > .grid > .card.black:before {
+  content: "🐈‍⬛"; /* black cat */
+}
+
 .grid > .card {
   border-radius: 0.5rem;
   aspect-ratio: 1 / 1;

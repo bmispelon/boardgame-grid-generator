@@ -223,6 +223,9 @@ function cssRotate(node, angle) {
   const currentAngle = match === null ? 0 : parseInt(match[1], 10);
   const newAngle = angle === null ? 0 : currentAngle + angle;
   node.style.transform = "rotate(" + newAngle + "deg)";
+  if (Math.abs(newAngle) >= 3 * 360) {
+    node.classList.add("easteregg");
+  }
 }
 
 /**
