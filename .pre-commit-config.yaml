@@ -18,6 +18,7 @@ repos:
           - html
           - javascript
           - yaml
+          - json
         additional_dependencies:
           - prettier@2.5.1
 
