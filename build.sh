@@ -8,23 +8,33 @@ set -e
 
 STATICFILES="application.js styles.css"
 HTMLFILES="index.html"
+OTHERFILES="favicon.ico"
 BUILDDIR=build
 
 
 mkdir -p $BUILDDIR
 
+for OTHERFILE in $OTHERFILES
+do
+  echo "Copying $OTHERFILE -> $BUILDDIR/$OTHERFILE"
+  cp "$OTHERFILE" "$BUILDDIR/$OTHERFILE"
+done
 
 for HTMLFILE in $HTMLFILES
 do
+  echo "Copying $HTMLFILE -> $BUILDDIR/$HTMLFILE"
   cp "$HTMLFILE" "$BUILDDIR/$HTMLFILE"
-  echo "Rewriting staticfile links in $BUILDDIR/$HTMLFILE:"
-  for STATICFILE in $STATICFILES
+done
+
+for STATICFILE in $STATICFILES
+do
+  MD5=$(md5sum "$STATICFILE" | cut -d" " -f1)
+  NEWFILENAME="${STATICFILE%.*}-$MD5.${STATICFILE##*.}"
+  echo "Copying $STATICFILE -> $BUILDDIR/$NEWFILENAME"
+  cp "$STATICFILE" "$BUILDDIR/$NEWFILENAME"
+
+  for HTMLFILE in $HTMLFILES
   do
-    MD5=$(md5sum "$STATICFILE" | cut -d" " -f1)
-    NEWFILENAME="${STATICFILE%.*}-$MD5.${STATICFILE##*.}"
-    echo "  $STATICFILE -> $BUILDDIR/$NEWFILENAME"
-    cp "$STATICFILE" "$BUILDDIR/$NEWFILENAME"
-    sed -E -i "s/(src|href)=(.)$FILENAME\2/\1=\2$NEWFILENAME\2/g" "$BUILDDIR/$HTMLFILE"
+    sed -E -i "s/(src|href)=(.)$STATICFILE\2/\1=\2$NEWFILENAME\2/g" "$BUILDDIR/$HTMLFILE"
   done
-  echo "Done."
 done

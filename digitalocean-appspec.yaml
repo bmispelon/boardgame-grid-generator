@@ -13,5 +13,6 @@ static_sites:
     name: boardgame-grid-generator
     build_command: ./build.sh
     source_dir: /
+    output_dir: build/
     routes:
       - path: /
