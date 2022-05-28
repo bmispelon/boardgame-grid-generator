@@ -1,0 +1,17 @@
+domains:
+  - domain: grid.bmispelon.rocks
+    type: PRIMARY
+    zone: bmispelon.rocks
+name: boardgamegrid
+region: ams
+static_sites:
+  - environment_slug: html
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: bmispelon/boardgame-grid-generator
+    name: boardgame-grid-generator
+    build_command: ./build.sh
+    source_dir: /
+    routes:
+      - path: /
